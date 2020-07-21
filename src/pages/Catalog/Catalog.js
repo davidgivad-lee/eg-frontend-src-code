@@ -1,10 +1,10 @@
 import React from "react";
-import "./Shop.scss";
+import "./Catalog.scss";
 
 export default function Shop() {
   return (
     <div className="container container-pad">
-      <h1>Shop</h1>
+      <h1>Pagina de catalogos</h1>
     </div>
   );
 }

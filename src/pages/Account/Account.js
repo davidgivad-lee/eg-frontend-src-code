@@ -1,10 +1,10 @@
 import React from "react";
-import "./About.scss";
+import "./Account.scss";
 
 export default function About() {
   return (
     <div className="container container-pad">
-      <h1>About</h1>
+      <h1>Pagina de mi cuenta</h1>
     </div>
   );
 }

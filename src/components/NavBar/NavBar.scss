@@ -1,0 +1,41 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+.logo-img {
+  width: 150px;
+  margin-right: 5px;
+  object-fit: cover;
+}
+
+.container-search-box {
+  top: 103px;
+  background-color: #f5f5f5;
+  padding: 37px 0;
+}
+
+.nav.navbar {
+  background: transparent;
+}
+
+@include media-breakpoint-down(sm) {
+  .navbar-collapse {
+    margin-top: 20px;
+    background-color: #f5f5f5;
+    margin-right: -1rem;
+    margin-left: -1rem;
+    margin-bottom: -0.5rem;
+  }
+  .search-display-container {
+    display: none !important;
+  }
+}
+
+.nav-item {
+  padding-left: 1rem;
+  border-bottom: 2px solid white;
+}
+
+.nav-search-box {
+  display: none;
+}
