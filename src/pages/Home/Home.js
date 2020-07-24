@@ -4,7 +4,7 @@ class Home extends Component {
   state = {};
   render() {
     return (
-      <div className="container container-pad">
+      <div>
         <h1> Bienvenido! </h1>
       </div>
     );

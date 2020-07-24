@@ -1,26 +1,72 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import NavBar from "./components/NavBar/NavBar";
-import Footer from "./components/Footer/Footer";
+
+//layouts
+import MainLayout from "./layouts/MainLayout";
+import LoginLayout from "./layouts/LoginLayout";
+
+//pages
 import Account from "./pages/Account/Account";
 import Home from "./pages/Home/Home";
 import Contact from "./pages/Contact/Contact";
 import Catalog from "./pages/Catalog/Catalog";
 import Help from "./pages/Help/Help";
+import Login from "./pages/Login/Login";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <NavBar />
       <Switch>
-        {/* <Route path="/" exact component={Home} /> */}
-        <Route path="/catalogos" component={Catalog} />
-        <Route path="/mi-cuenta" component={Account} />
-        <Route path="/ayuda" component={Help} />
-        <Route path="/contacto" component={Contact} />
-        <Route path="/" component={Home} />
+        <Route
+          path="/catalogos"
+          render={() => (
+            <MainLayout>
+              <Catalog />
+            </MainLayout>
+          )}
+        />
+        <Route
+          path="/login"
+          render={() => (
+            <LoginLayout>
+              <Login />
+            </LoginLayout>
+          )}
+        />
+        <Route
+          path="/mi-cuenta"
+          render={() => (
+            <MainLayout>
+              <Account />
+            </MainLayout>
+          )}
+        />
+        <Route
+          path="/ayuda"
+          render={() => (
+            <MainLayout>
+              <Help />
+            </MainLayout>
+          )}
+        />
+        <Route
+          path="/contacto"
+          render={() => (
+            <MainLayout>
+              <Contact />
+            </MainLayout>
+          )}
+        />
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <MainLayout>
+              <Home />
+            </MainLayout>
+          )}
+        />
       </Switch>
-      <Footer />
     </BrowserRouter>
   );
 }

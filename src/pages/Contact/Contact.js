@@ -3,7 +3,7 @@ class Contact extends Component {
   state = {};
   render() {
     return (
-      <div className="container container-pad">
+      <div>
         <h1> Pagina de Contacto</h1>
       </div>
     );

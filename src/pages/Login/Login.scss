@@ -1,0 +1,16 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+.login-row {
+  padding: 100px 0px;
+}
+
+@include media-breakpoint-down(sm) {
+  .login-row {
+    padding: 20px 10px;
+  }
+  .register-container {
+    margin-bottom: 20px;
+  }
+}

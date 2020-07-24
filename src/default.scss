@@ -1,25 +1,11 @@
-// .App {
-//   text-align: center;
-// }
-
-// html {
-//   font-size: 10px;
-// }
-
-// html,
-// body {
-//   height: 100%;
-//   padding: 0;
-//   margin: 0;
-// }
-
-// *,
-// ::before,
-// ::after {
-//   -webkit-box-sizing: border-box;
-//   -moz-box-sizing: border-box;
-//   box-sizing: border-box;
-// }
+.background-img {
+  height: 100vh;
+  background-image: url(./assets/background.jpeg);
+  background-size: cover;
+  background-position: center center;
+  background-position-x: center;
+  background-position-y: center;
+}
 
 body {
   font-family: "Roboto Mono", sans-serif;
