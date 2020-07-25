@@ -12,11 +12,20 @@ import Contact from "./pages/Contact/Contact";
 import Catalog from "./pages/Catalog/Catalog";
 import Help from "./pages/Help/Help";
 import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route
+          path="/register"
+          render={() => (
+            <LoginLayout>
+              <Register />
+            </LoginLayout>
+          )}
+        />
         <Route
           path="/catalogos"
           render={() => (

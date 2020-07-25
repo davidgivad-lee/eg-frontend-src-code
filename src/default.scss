@@ -1,10 +1,16 @@
 .background-img {
-  height: 100vh;
   background-image: url(./assets/background.jpeg);
   background-size: cover;
   background-position: center center;
   background-position-x: center;
   background-position-y: center;
+}
+
+.container-pad-top {
+  padding-top: 103px !important;
+}
+.pb-c-60 {
+  padding-bottom: 60px;
 }
 
 body {
@@ -24,7 +30,3 @@ body {
 //   -moz-transition: all 0.4s ease-in-out;
 //   transition: all 0.4s ease-in-out;
 // }
-
-.container-pad {
-  padding: 110px 15px 0;
-}

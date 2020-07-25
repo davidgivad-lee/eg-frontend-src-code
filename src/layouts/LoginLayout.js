@@ -4,11 +4,9 @@ import Footer from "../components/Footer/Footer";
 
 const LoginLayout = (props) => {
   return (
-    <div>
+    <div className="container-fluid position-relative min-vh-100 px-0 container-pad-top background-img">
       <NavBar />
-      <div className="container-fluid container-pad background-img">
-        {props.children}
-      </div>
+      <div className="pb-c-60">{props.children}</div>
       <Footer />
     </div>
   );

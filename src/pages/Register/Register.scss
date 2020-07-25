@@ -1,0 +1,13 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+.register-row {
+  padding: 50px 0px;
+}
+
+@include media-breakpoint-down(sm) {
+  .register-row {
+    padding: 50px 10px;
+  }
+}
