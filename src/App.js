@@ -13,8 +13,9 @@ import Catalog from "./pages/Catalog/Catalog";
 import Help from "./pages/Help/Help";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import ProductDetail from "./pages/Product/ProductDetail";
 
-export default function App() {
+const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
@@ -27,10 +28,19 @@ export default function App() {
           )}
         />
         <Route
+          exact
           path="/catalogos"
           render={() => (
             <MainLayout>
               <Catalog />
+            </MainLayout>
+          )}
+        />
+        <Route
+          path="/catalogos/:id"
+          render={(props) => (
+            <MainLayout>
+              <ProductDetail {...props} />
             </MainLayout>
           )}
         />
@@ -78,4 +88,6 @@ export default function App() {
       </Switch>
     </BrowserRouter>
   );
-}
+};
+
+export default App;
