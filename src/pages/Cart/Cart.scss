@@ -1,0 +1,33 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+@include media-breakpoint-down(sm) {
+  .cart-data-head {
+    display: none !important;
+  }
+}
+
+.imgg {
+  width: 25%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-left: 0;
+  display: inline-block;
+  height: auto;
+  max-height: 150px;
+  max-width: 100%;
+  padding: 0;
+}
+
+.cartItemContainer {
+  height: auto;
+}
+
+.descriptionContainer {
+  padding-left: 25%;
+}

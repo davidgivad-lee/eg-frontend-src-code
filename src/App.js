@@ -14,6 +14,7 @@ import Help from "./pages/Help/Help";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import ProductDetail from "./pages/Product/ProductDetail";
+import Cart from "./pages/Cart/Cart";
 
 const App = (props) => {
   return (
@@ -73,6 +74,15 @@ const App = (props) => {
           render={() => (
             <MainLayout>
               <Contact />
+            </MainLayout>
+          )}
+        />
+
+        <Route
+          path="/cart/:id?"
+          render={(props) => (
+            <MainLayout>
+              <Cart {...props} />
             </MainLayout>
           )}
         />

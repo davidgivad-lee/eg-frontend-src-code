@@ -1,20 +1,23 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import { productsReducer } from "./Products/ProductsReducer";
 import thunk from "redux-thunk";
-// import logger from 'redux-logger';
-// import thunk from 'redux-thunk';
-// import createSagaMiddle from 'redux-saga';
+import Cookie from "js-cookie";
+import {
+  productsReducer,
+  productDetailsReducer,
+} from "./Products/productsReducer";
+import { cartReducer } from "./Cart/cartReducer";
 
-// import rootReducer from './rootReducer';
-// import rootSaga from './rootSaga';
+const cartItems = Cookie.getJSON("cartItems") || [];
+//const userInfo = Cookie.getJSON('userInfo') || null;
 
-// const sagaMiddleware = createSagaMiddle();
-// export const middlewares = [thunk, sagaMiddleware, logger];
-
-const initialState = {};
+const initialState = {
+  cart: { cartItems },
+};
 
 const reducer = combineReducers({
   productList: productsReducer,
+  productDetails: productDetailsReducer,
+  cart: cartReducer,
 });
 
 const composeEnchancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -24,6 +27,5 @@ export const store = createStore(
   initialState,
   composeEnchancer(applyMiddleware(thunk))
 );
-// sagaMiddleware.run(rootSaga);
 
 export default store;

@@ -1,0 +1,23 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+.login-text-container {
+  display: inline-block;
+}
+@include media-breakpoint-down(sm) {
+  .display-login-text {
+    display: none !important;
+  }
+}
+
+.logo-img {
+  width: 150px;
+  margin-right: 5px;
+  object-fit: cover;
+}
+
+.cartNumber {
+  margin-left: -15px;
+  margin-top: 9px;
+}
