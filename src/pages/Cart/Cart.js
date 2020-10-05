@@ -43,7 +43,7 @@ function Cart(props) {
         <div className="col-3 pl-0">
           <p className="font-weight-bold">Cantidad</p>
         </div>
-        <div className="col-1 pl-0">
+        <div className="col-1 pl-0 text-right">
           <p className="font-weight-bold">Total</p>
         </div>
       </div>
@@ -53,40 +53,42 @@ function Cart(props) {
         cartItems.map((item, i) => <CartItem item={item} key={i} />)
       )}
 
-      <div className="row mt-4 mx-0">
-        <div className="col-6 ml-auto">
-          <div className="row border-bottom mb-4">
-            <div className="col-6">
-              <p className="font-weight-bold text-secondary">SubTotal:</p>
+      {cartItems.length > 0 && (
+        <div className="row mt-4 mx-0">
+          <div className="col-6 ml-auto">
+            <div className="row border-bottom mb-4">
+              <div className="col-6">
+                <p className="font-weight-bold text-secondary">SubTotal:</p>
+              </div>
+              <div className="col-6 text-right">
+                $ {cartItems.length > 0 && subTotal()}
+              </div>
             </div>
-            <div className="col-6 text-right">
-              $ {cartItems.length > 0 && subTotal()}
+            <div className="row border-bottom  mb-4">
+              <div className="col-6">
+                <p className="font-weight-bold text-secondary">IVA (22%):</p>
+              </div>
+              <div className="col-6 text-right">
+                $ {cartItems.length > 0 && subTotal() * 0.22}
+              </div>
             </div>
-          </div>
-          <div className="row border-bottom  mb-4">
-            <div className="col-6">
-              <p className="font-weight-bold text-secondary">IVA (22%):</p>
+            <div className="row border-bottom  mb-4">
+              <div className="col-6">
+                <p className="font-weight-bold text-secondary">Descuento:</p>
+              </div>
+              <div className="col-6 text-right">% 0</div>
             </div>
-            <div className="col-6 text-right">
-              $ {cartItems.length > 0 && subTotal() * 0.22}
-            </div>
-          </div>
-          <div className="row border-bottom  mb-4">
-            <div className="col-6">
-              <p className="font-weight-bold text-secondary">Descuento:</p>
-            </div>
-            <div className="col-6 text-right">% 0</div>
-          </div>
-          <div className="row mb-4">
-            <div className="col-6">
-              <p className="font-weight-bold text-secondary">Total:</p>
-            </div>
-            <div className="col-6 text-right">
-              $ {cartItems.length > 0 && subTotal()}
+            <div className="row mb-4">
+              <div className="col-6">
+                <p className="font-weight-bold text-secondary">Total:</p>
+              </div>
+              <div className="col-6 text-right">
+                $ {cartItems.length > 0 && subTotal()}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
       {cartItems.length > 0 && (
         <div className="text-right">
           <button
