@@ -22,7 +22,7 @@ function Catalog(props) {
       {products.map((product, i) => (
         <div className="col-6 col-lg-4 col-xl-3" key={i}>
           <Link to={"/catalogos/" + product.id}>
-            <img className="w-100" src={productImg} alt="Product Image" />
+            <img className="w-100" src={productImg} alt="Producto..." />
           </Link>
           <p className="text-center mb-0"> {product.name}</p>
           <p className="text-center"> $ {product.price}</p>

@@ -33,7 +33,7 @@ const CartItem = (props) => {
         <img
           className="productImg w-100 my-auto"
           src={productImg}
-          alt="Product Image"
+          alt="Producto..."
         />
       </div>
       <div className="col-8 col-sm-9 col-md-4 my-auto py-2">

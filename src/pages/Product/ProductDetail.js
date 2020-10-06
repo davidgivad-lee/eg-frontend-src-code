@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { detailsProduct } from "../../redux/Products/productsActions";
 import { addToCart } from "../../redux/Cart/cartActions";
@@ -46,7 +46,7 @@ function ProductDetail(props) {
       ) : (
         <div className="row justify-content-around">
           <div className="col-12 col-md-6 p-2">
-            <img className="w-100" src={productImg} />
+            <img className="w-100" src={productImg} alt="Producto..." />
           </div>
           <div className="col-12 col-md-6 p-2">
             <div className="productDetail">

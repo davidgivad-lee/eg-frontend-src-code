@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 function Counter(props) {
   const { qty, increment, decrement } = props;

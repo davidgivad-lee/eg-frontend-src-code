@@ -7,6 +7,8 @@ import "./Header.scss";
 
 function Header(props) {
   const cart = useSelector((state) => state.cart);
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
 
   const { cartItems } = cart;
 
@@ -41,7 +43,9 @@ function Header(props) {
                 />
               </svg>
               <div className="login-text-container">
-                <p className="display-login-text mr-2 font-15 "> LOG IN </p>
+                <p className="display-login-text mr-2 font-15 ">
+                  {userInfo ? userInfo.name : "LOG IN"}
+                </p>
               </div>
             </a>
             <a className="text-dark" href="/cart">

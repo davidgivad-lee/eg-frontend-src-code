@@ -47,9 +47,9 @@ const App = (props) => {
         />
         <Route
           path="/login"
-          render={() => (
+          render={(props) => (
             <LoginLayout>
-              <Login />
+              <Login {...props} />
             </LoginLayout>
           )}
         />

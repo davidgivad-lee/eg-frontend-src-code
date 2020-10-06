@@ -5,16 +5,19 @@ import {
   productsReducer,
   productDetailsReducer,
 } from "./Products/productsReducer";
+import { userSigninReducer } from "./User/userReducer";
 import { cartReducer } from "./Cart/cartReducer";
 
 const cartItems = Cookie.getJSON("cartItems") || [];
-//const userInfo = Cookie.getJSON('userInfo') || null;
+const userInfo = Cookie.getJSON("userInfo") || null;
 
 const initialState = {
   cart: { cartItems },
+  userSignin: { userInfo },
 };
 
 const reducer = combineReducers({
+  userSignin: userSigninReducer,
   productList: productsReducer,
   productDetails: productDetailsReducer,
   cart: cartReducer,

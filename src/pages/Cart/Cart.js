@@ -1,12 +1,7 @@
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  cleanCart,
-  removeFromCart,
-} from "../../redux/Cart/cartActions";
-import Counter from "../../components/Counter/Counter";
+import { useSelector } from "react-redux";
+import { cleanCart } from "../../redux/Cart/cartActions";
 import CartItem from "./CartItem";
 import "./Cart.scss";
 
