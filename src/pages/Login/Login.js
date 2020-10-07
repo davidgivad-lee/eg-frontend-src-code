@@ -8,7 +8,7 @@ import "./Login.scss";
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorForm, addError] = useState([]);
+  const [errorForm, addError] = useState({});
   const userSignin = useSelector((state) => state.userSignin);
   const { loading, userInfo, error } = userSignin;
 
@@ -24,25 +24,28 @@ const Login = (props) => {
   }, [userInfo]);
 
   const hasError = (key) => {
-    return errorForm.indexOf(key) !== -1;
+    return errorForm.hasOwnProperty(key);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    let errors = [];
+    let errors = {};
     const expression = /\S+@\S+/;
     const validEmail = expression.test(String(email).toLowerCase());
 
-    if (!validEmail || email === "") {
-      errors.push("email");
+    if (email === "") {
+      errors.email = "Debes ingresar un email.";
+    } else if (!validEmail) {
+      errors.email = "Debes ingresar un email con formato válido.";
     }
+
     if (password === "") {
-      errors.push("password");
+      errors.password = "Debes ingresar una contraseña";
     }
 
     addError(errors);
-    if (errors.length === 0) {
+    if (Object.keys(errors).length === 0 && errors.constructor === Object) {
       dispatch(signin(email, password));
     }
   };
@@ -82,7 +85,7 @@ const Login = (props) => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <div className={hasError("email") ? "invalid-feedback" : "hidden"}>
-              Debes ingresar un email correcto.
+              {errorForm.email}
             </div>
           </div>
           <div className="form-group">
@@ -101,7 +104,7 @@ const Login = (props) => {
             <div
               className={hasError("password") ? "invalid-feedback" : "hidden"}
             >
-              Revisa tu clave.
+              {errorForm.password}
             </div>
           </div>
         </form>
