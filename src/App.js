@@ -22,9 +22,9 @@ const App = (props) => {
       <Switch>
         <Route
           path="/register"
-          render={() => (
+          render={(props) => (
             <LoginLayout>
-              <Register />
+              <Register {...props} />
             </LoginLayout>
           )}
         />

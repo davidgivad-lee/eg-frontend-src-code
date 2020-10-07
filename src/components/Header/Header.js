@@ -44,7 +44,7 @@ function Header(props) {
               </svg>
               <div className="login-text-container">
                 <p className="display-login-text mr-2 font-15 ">
-                  {userInfo ? userInfo.name : "LOG IN"}
+                  {userInfo ? userInfo.firstName : "LOG IN"}
                 </p>
               </div>
             </a>
