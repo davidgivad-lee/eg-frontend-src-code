@@ -43,7 +43,7 @@ function Header(props) {
                 />
               </svg>
               <div className="login-text-container">
-                <p className="display-login-text mr-2 font-15 ">
+                <p className="display-login-text mr-2 font-12 ">
                   {userInfo ? userInfo.firstName : "LOG IN"}
                 </p>
               </div>

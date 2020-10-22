@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 //layouts
 import MainLayout from "./layouts/MainLayout";
 import LoginLayout from "./layouts/LoginLayout";
+import DefaultLayout from "./layouts/DefaultLayout";
 
 //pages
 import Account from "./pages/Account/Account";
@@ -15,11 +16,20 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import ProductDetail from "./pages/Product/ProductDetail";
 import Cart from "./pages/Cart/Cart";
+import Checkout from "./pages/Checkout/Checkout";
 
 const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
+        <Route
+          path="/checkout"
+          render={(props) => (
+            <DefaultLayout>
+              <Checkout {...props} />
+            </DefaultLayout>
+          )}
+        />
         <Route
           path="/register"
           render={(props) => (

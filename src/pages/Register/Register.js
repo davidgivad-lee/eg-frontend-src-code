@@ -21,11 +21,15 @@ const Register = (props) => {
   const { loading, userInfo, error } = userSignup;
 
   const dispatch = useDispatch();
+  const redirect = props.location.search
+    ? props.location.search.split("=")[1]
+    : "/mi-cuenta";
 
   const history = useHistory();
 
   useEffect(() => {
     if (userInfo) {
+      props.history.push(redirect);
       history.go(0);
     }
     if (userSigninInfo) {
@@ -47,10 +51,10 @@ const Register = (props) => {
     const expression = /\S+@\S+/;
     const validEmail = expression.test(String(email).toLowerCase());
 
-    if (firstName == "") {
+    if (firstName === "") {
       errors.firstName = "Debes ingresar un nombre.";
     }
-    if (lastName == "") {
+    if (lastName === "") {
       errors.lastName = "Debes ingresar un apellido.";
     }
     if (email === "") {

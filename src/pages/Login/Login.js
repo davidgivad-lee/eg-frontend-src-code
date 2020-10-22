@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
+import Button from "../../components/Button/Button";
 import { signin } from "../../redux/User/userActions.js";
 
 import "./Login.scss";
@@ -13,10 +14,13 @@ const Login = (props) => {
   const { loading, userInfo, error } = userSignin;
 
   const dispatch = useDispatch();
+  const redirect = props.location.search
+    ? props.location.search.split("=")[1]
+    : "/mi-cuenta";
 
   useEffect(() => {
     if (userInfo) {
-      props.history.push("/mi-cuenta");
+      props.history.push(redirect);
     }
     return () => {
       //
@@ -25,6 +29,14 @@ const Login = (props) => {
 
   const hasError = (key) => {
     return errorForm.hasOwnProperty(key);
+  };
+
+  const submitRegister = (e) => {
+    if (props.location.search) {
+      props.history.push("/register?redirect=checkout");
+    } else {
+      props.history.push("/register");
+    }
   };
 
   const submitHandler = (e) => {
@@ -60,11 +72,12 @@ const Login = (props) => {
         </p>
         <p className="font-weight-light text-center"> BlablaBlablaBlabla </p>
         <p className="font-weight-light text-center"> BlablaBlablaBlabla </p>
-        <Link to="/register">
-          <button type="submit" className="btn btn-dark w-100">
-            Registrar
-          </button>
-        </Link>
+
+        <Button
+          text={"Registrar"}
+          submitHandler={submitRegister}
+          customStyle={"w-100"}
+        />
       </div>
       <div className="col-md-5 p-5 bg-light">
         {error && (
@@ -108,25 +121,12 @@ const Login = (props) => {
             </div>
           </div>
         </form>
-        <button
-          type="submit"
-          className="btn btn-dark w-100"
-          disabled={loading}
-          onClick={submitHandler}
-        >
-          {loading ? (
-            <div>
-              <span
-                className="spinner-border spinner-border-sm mr-2"
-                role="status"
-                aria-hidden="true"
-              ></span>
-              Loading...
-            </div>
-          ) : (
-            "Ingresar"
-          )}
-        </button>
+        <Button
+          loading={loading}
+          text={"Ingresar"}
+          submitHandler={submitHandler}
+          customStyle={"w-100"}
+        />
       </div>
     </div>
   );

@@ -1,7 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { cleanCart } from "../../redux/Cart/cartActions";
 import CartItem from "./CartItem";
 import "./Cart.scss";
 
@@ -10,12 +8,9 @@ function Cart(props) {
 
   const { cartItems } = cart;
 
-  let history = useHistory();
-
-  const cleanCartItems = () => {
-    cleanCart();
-    history.push("/");
-    window.location.reload();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    props.history.push("/login?redirect=checkout");
   };
 
   const subTotal = () => {
@@ -88,7 +83,7 @@ function Cart(props) {
         <div className="text-right">
           <button
             type="button"
-            onClick={cleanCartItems}
+            onClick={submitHandler}
             className="btn btn-dark"
           >
             Comprar
