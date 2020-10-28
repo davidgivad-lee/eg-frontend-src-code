@@ -4,6 +4,7 @@ import Cookie from "js-cookie";
 import {
   productsReducer,
   productDetailsReducer,
+  productDeleteReducer,
 } from "./Products/productsReducer";
 import {
   userSigninReducer,
@@ -26,6 +27,7 @@ const reducer = combineReducers({
   userUpdate: userUpdateReducer,
   productList: productsReducer,
   productDetails: productDetailsReducer,
+  productDelete: productDeleteReducer,
   cart: cartReducer,
 });
 

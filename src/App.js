@@ -19,11 +19,20 @@ import ProductDetail from "./pages/Product/ProductDetail";
 import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
 import Dashboard from "./pages/Admin/Dashboard";
+import AdminProduct from "./pages/AdminProduct/AdminProduct";
 
 const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
+        <Route
+          path="/admin/products"
+          render={(props) => (
+            <DashboardLayout>
+              <AdminProduct {...props} />
+            </DashboardLayout>
+          )}
+        />
         <Route
           path="/admin"
           render={(props) => (

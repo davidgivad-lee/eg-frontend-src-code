@@ -6,6 +6,9 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_SUCCESS,
+  PRODUCT_DELETE_FAIL,
 } from "./productsConstants";
 
 const listProducts = () => async (dispatch) => {
@@ -31,4 +34,17 @@ const detailsProduct = (productId) => async (dispatch) => {
   }
 };
 
-export { listProducts, detailsProduct };
+const deleteProduct = (productId) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_DELETE_REQUEST, payload: productId });
+    const { data } = await axios.put("/api/products/delete/" + productId);
+    dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_DELETE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export { listProducts, detailsProduct, deleteProduct };

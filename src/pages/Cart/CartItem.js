@@ -4,10 +4,10 @@ import { useDispatch } from "react-redux";
 import { useQty } from "../../Hooks/useQty";
 import Counter from "../../components/Counter/Counter";
 import { addToCart } from "../../redux/Cart/cartActions";
-import DeleteModal from "./DeleteModal";
-import "./Cart.scss";
-
+import DeleteModal from "../../components/Modal/DeleteModal";
+import { removeFromCart } from "../../redux/Cart/cartActions";
 import productImg from "../../assets/product1.png";
+import "./Cart.scss";
 
 const CartItem = (props) => {
   const { item } = props;
@@ -25,6 +25,10 @@ const CartItem = (props) => {
     const qty = quantity.value + 1;
     quantity.setValue(qty);
     dispatch(addToCart(item.product, qty));
+  };
+
+  const removeFromCartHandler = (productId) => {
+    dispatch(removeFromCart(productId));
   };
 
   return (
@@ -79,7 +83,7 @@ const CartItem = (props) => {
             <a
               className="d-inline-block ml-3 float-right"
               data-toggle="modal"
-              data-target="#staticBackdrop"
+              data-target="#cartProductDeleteModal"
             >
               <svg
                 width="1em"
@@ -102,7 +106,11 @@ const CartItem = (props) => {
           </div>
         </div>
       </div>
-      <DeleteModal id={item.product} />
+      <DeleteModal
+        id="cartProductDeleteModal"
+        warningText="¿Desea eliminar este artículo?"
+        handleSubmit={() => removeFromCartHandler(item.product)}
+      />
     </div>
   );
 };

@@ -14,10 +14,10 @@ const DashboardLayout = (props) => {
       </div>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-3 col-lg-2 p-0 dashboard-width">
+          <div className="col-md-3 col-lg-2 p-0">
             <Sidebar />
           </div>
-          <div className="col-md-auto col-lg-auto ">{props.children}</div>
+          <div className="col-md-9 col-lg-10 ">{props.children}</div>
         </div>
       </div>
     </div>
