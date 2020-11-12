@@ -9,7 +9,41 @@ import {
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_SUCCESS,
   PRODUCT_DELETE_FAIL,
+  PRODUCT_SAVE_REQUEST,
+  PRODUCT_SAVE_SUCCESS,
+  PRODUCT_SAVE_FAIL,
 } from "./productsConstants";
+
+const saveProduct = (product) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: PRODUCT_SAVE_REQUEST, payload: product });
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    if (!product.id) {
+      const { data } = await axios.post("/api/products", product, {
+        headers: {
+          Authorization: "Bearer " + userInfo.token,
+        },
+      });
+      dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: data });
+    } else {
+      const { data } = await axios.put(
+        "/api/products/" + product._id,
+        product,
+        {
+          headers: {
+            Authorization: "Bearer " + userInfo.token,
+          },
+        }
+      );
+      dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: data });
+    }
+  } catch (error) {
+    const errMsj = error.response ? error.response.data.message : error.message;
+    dispatch({ type: PRODUCT_SAVE_FAIL, payload: errMsj });
+  }
+};
 
 const listProducts = () => async (dispatch) => {
   try {
@@ -47,4 +81,4 @@ const deleteProduct = (productId) => async (dispatch) => {
   }
 };
 
-export { listProducts, detailsProduct, deleteProduct };
+export { listProducts, detailsProduct, deleteProduct, saveProduct };

@@ -52,7 +52,7 @@ const update = (
     }
     Cookie.set("userInfo", JSON.stringify(data));
   } catch (error) {
-    dispatch({ type: USER_UPDATE_FAIL, payload: error.message });
+    dispatch({ type: USER_UPDATE_FAIL, payload: error.response.data.message });
   }
 };
 

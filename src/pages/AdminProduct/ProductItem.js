@@ -13,7 +13,9 @@ const ProductItem = (props) => {
   };
   return (
     <tr>
-      <th scope="row">{props.product.id}</th>
+      <th className="text-secondary font-weight-normal" scope="row">
+        {props.product._id.slice(0, 8) + "..."}
+      </th>
       <td>{props.product.name}</td>
       <td>
         {props.product.nameDetail

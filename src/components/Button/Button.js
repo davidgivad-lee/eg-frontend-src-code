@@ -7,6 +7,7 @@ const Button = (props) => {
       className={"btn btn-dark " + props.customStyle}
       disabled={props.loading}
       onClick={props.submitHandler}
+      data-dismiss={props.modal}
     >
       {props.loading ? (
         <div>

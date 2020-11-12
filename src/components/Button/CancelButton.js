@@ -9,6 +9,7 @@ const CancelButton = (props) => {
       className={"btn btn-outline-dark btn-cancel " + props.customStyle}
       disabled={props.loading}
       onClick={props.submitHandler}
+      data-dismiss={props.modal}
     >
       {props.loading ? (
         <div>

@@ -1,45 +1,148 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { listProducts } from "../../redux/Products/productsActions";
 
 import configIcon from "../../assets/icons/config.svg";
+import { ReactComponent as PlusIcon } from "../../assets/icons/plusCircle.svg";
 import productImg from "../../assets/product1.png";
+import sortIcon from "../../assets/icons/sort.png";
 import ProductItem from "./ProductItem";
+import AddProductModal from "./AddProductModal";
+import "./AdminProduct.scss";
 
 const AdminProduct = () => {
+  const [qtyListItem, setQtyListItem] = useState("10");
+
   const productList = useSelector((state) => state.productList);
+  const productSave = useSelector((state) => state.productSave);
+  const { product, success } = productSave;
   const { products, loading, error } = productList;
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (success) {
+      dispatch(listProducts());
+    }
+    return () => {};
+  }, [product]);
+
   useEffect(() => {
     dispatch(listProducts());
   }, []);
 
-  const handleOption = () => {};
+  const selectHandle = (qty) => {
+    setQtyListItem(qty);
+    //dispatch(listProducts(qty))
+  };
+  const qtyList = [10, 50, 100];
+  const handleSearch = (text) => {
+    //dispatch(productSearch(text))
+  };
   return loading ? (
     <div> Loading...</div>
   ) : error ? (
     <div> error</div>
   ) : (
     <div className="container-fluid">
-      <h4>Administrar los productos</h4>
-      <div className="row">
-        <div className="col-6">Mostrar XX cantidad</div>
-        <div className="col-6">Buscar:</div>
+      <h4 className="d-inline-block my-3">Administrar los productos</h4>
+      <div className="d-inline-block float-right mt-3 mr-3">
+        <a
+          type="button"
+          className=""
+          data-toggle="modal"
+          data-target="#addModal"
+        >
+          <PlusIcon className="text-primary" width="32" height="32" />
+        </a>
+      </div>
+      <div className="row m-0">
+        <div className="col-6">
+          Mostrar
+          <div className="dropdown d-inline-block ">
+            <button
+              className="btn dropdown-toggle p-1 m-2 border"
+              type="button"
+              id="selectDropdown"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              {qtyListItem}
+            </button>
+            <div className="dropdown-menu" aria-labelledby="selectDropdown">
+              {qtyList.map((item, i) => (
+                <button
+                  key={i}
+                  onClick={() => selectHandle(item)}
+                  className="dropdown-item px-2"
+                  type="button"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
+          cantidad
+        </div>
+        <div className="col-6 text-right">
+          <p className="d-inline-block mb-0 mr-2"> Buscar: </p>
+          <input
+            type="text"
+            className="w-auto form-control d-inline-block "
+            onChange={(e) => handleSearch(e.target.value)}
+          />
+        </div>
       </div>
       <div className="table-responsive">
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Nombre detallado</th>
-              <th scope="col">Descripción</th>
-              <th scope="col">Review</th>
-              <th scope="col">Categoria</th>
-              <th scope="col">Precio unidad</th>
-              <th scope="col">Precio mayor</th>
-              <th scope="col">Colores</th>
-              <th scope="col">
+              <th className="nowrap" scope="col">
+                ID
+                <a className="ml-2" href="#">
+                  <img width="17" height="17" src={sortIcon} />
+                </a>
+              </th>
+              <th className="nowrap" scope="col">
+                Nombre
+                <a className="ml-2" href="#">
+                  <img width="17" height="17" src={sortIcon} />
+                </a>
+              </th>
+              <th className="nowrap" scope="col">
+                Nombre detallado
+              </th>
+              <th className="nowrap" scope="col">
+                Descripción
+              </th>
+              <th className="nowrap" scope="col">
+                Review
+                <a className="ml-2" href="#">
+                  <img width="17" height="17" src={sortIcon} />
+                </a>
+              </th>
+              <th className="nowrap" scope="col">
+                Categoria
+                <a className="ml-2" href="#">
+                  <img width="17" height="17" src={sortIcon} />
+                </a>
+              </th>
+              <th className="nowrap" scope="col">
+                Precio
+                <a className="ml-2" href="#">
+                  <img width="17" height="17" src={sortIcon} />
+                </a>
+              </th>
+              <th className="nowrap" scope="col">
+                Precio mayor
+                <a className="ml-2" href="#">
+                  <img width="17" height="17" src={sortIcon} />
+                </a>
+              </th>
+              <th className="nowrap" scope="col">
+                Colores
+              </th>
+              <th className="nowrap" scope="col">
                 <img src={configIcon} />
               </th>
             </tr>
@@ -51,6 +154,7 @@ const AdminProduct = () => {
           </tbody>
         </table>
       </div>
+      <AddProductModal />
     </div>
   );
 };
