@@ -1,5 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import DeleteModal from "../../components/Modal/DeleteModal";
 import optionIcon from "../../assets/icons/option.svg";
@@ -7,9 +7,12 @@ import { ReactComponent as TrashIcon } from "../../assets/icons/trash.svg";
 import { deleteProduct } from "../../redux/Products/productsActions";
 
 const ProductItem = (props) => {
+  const productDelete = useSelector((state) => state.productDelete);
+  const { loading, message, success } = productDelete;
+
   const dispatch = useDispatch();
   const deleteHandle = (productId) => {
-    //dispatch(deleteProduct(productId));
+    dispatch(deleteProduct(productId));
   };
   return (
     <tr>
@@ -66,7 +69,8 @@ const ProductItem = (props) => {
         <DeleteModal
           id="deleteProductModal"
           warningText="¿Desea eliminar este producto?"
-          handleSubmit={deleteHandle(props.product.id)}
+          handleSubmit={() => deleteHandle(props.product._id)}
+          loading={loading}
         />
       </td>
     </tr>

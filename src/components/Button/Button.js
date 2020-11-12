@@ -4,7 +4,11 @@ const Button = (props) => {
   return (
     <button
       type="submit"
-      className={"btn btn-dark " + props.customStyle}
+      className={
+        props.color
+          ? "btn " + props.color + " " + props.customStyle
+          : "btn btn-dark " + props.customStyle
+      }
       disabled={props.loading}
       onClick={props.submitHandler}
       data-dismiss={props.modal}

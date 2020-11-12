@@ -1,5 +1,6 @@
 import React from "react";
 
+import Button from "../Button/Button";
 import { ReactComponent as AlertIcon } from "../../assets/icons/alert.svg";
 
 const DeleteModal = (props) => {
@@ -30,22 +31,20 @@ const DeleteModal = (props) => {
             <p className="font-weight-bold">{props.warningText}</p>
           </div>
           <div className="modal-footer border-0 mx-auto">
-            <button
-              type="button"
-              className="btn btn-secondary px-4"
-              data-dismiss="modal"
-              onClick={props.handleSubmit}
-            >
-              Eliminar
-            </button>
-            <button
-              type="button"
-              className="btn border 
-            btn-transparent"
-              data-dismiss="modal"
-            >
-              Cancelar
-            </button>
+            <Button
+              loading={props.loading}
+              text={"Eliminar"}
+              submitHandler={props.handleSubmit}
+              color="btn-secondary"
+              customStyle={"px-4"}
+              modal="modal"
+            />
+            <Button
+              text={"Cancelar"}
+              color="btn-transparent"
+              customStyle={"border"}
+              modal="modal"
+            />
           </div>
         </div>
       </div>

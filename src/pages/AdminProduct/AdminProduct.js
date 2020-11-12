@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { listProducts } from "../../redux/Products/productsActions";
 
+import Spinner from "../../components/Spinner/Spinner";
 import configIcon from "../../assets/icons/config.svg";
 import { ReactComponent as PlusIcon } from "../../assets/icons/plusCircle.svg";
 import productImg from "../../assets/product1.png";
@@ -15,20 +16,22 @@ const AdminProduct = () => {
 
   const productList = useSelector((state) => state.productList);
   const productSave = useSelector((state) => state.productSave);
+  const productDelete = useSelector((state) => state.productDelete);
+  const { message } = productDelete;
   const { product, success } = productSave;
   const { products, loading, error } = productList;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (success) {
+    dispatch(listProducts());
+  }, []);
+
+  useEffect(() => {
+    if (success || productDelete.success) {
       dispatch(listProducts());
     }
     return () => {};
-  }, [product]);
-
-  useEffect(() => {
-    dispatch(listProducts());
-  }, []);
+  }, [product, message]);
 
   const selectHandle = (qty) => {
     setQtyListItem(qty);
@@ -38,9 +41,7 @@ const AdminProduct = () => {
   const handleSearch = (text) => {
     //dispatch(productSearch(text))
   };
-  return loading ? (
-    <div> Loading...</div>
-  ) : error ? (
+  return error ? (
     <div> error</div>
   ) : (
     <div className="container-fluid">
@@ -148,9 +149,15 @@ const AdminProduct = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((item, i) => (
-              <ProductItem key={i} product={item} />
-            ))}
+            {loading ? (
+              <tr>
+                <td>
+                  <Spinner />
+                </td>
+              </tr>
+            ) : (
+              products.map((item, i) => <ProductItem key={i} product={item} />)
+            )}
           </tbody>
         </table>
       </div>
