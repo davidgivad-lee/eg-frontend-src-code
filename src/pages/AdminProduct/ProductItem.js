@@ -1,19 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import DeleteModal from "../../components/Modal/DeleteModal";
 import optionIcon from "../../assets/icons/option.svg";
 import { ReactComponent as TrashIcon } from "../../assets/icons/trash.svg";
 import { deleteProduct } from "../../redux/Products/productsActions";
 
-const ProductItem = (props) => {
-  const productDelete = useSelector((state) => state.productDelete);
-  const { loading, message, success } = productDelete;
+import Button from "../../components/Button/Button";
+import { ReactComponent as AlertIcon } from "../../assets/icons/alert.svg";
 
-  const dispatch = useDispatch();
-  const deleteHandle = (productId) => {
-    dispatch(deleteProduct(productId));
-  };
+const ProductItem = (props) => {
   return (
     <tr>
       <th className="text-secondary font-weight-normal" scope="row">
@@ -40,7 +35,7 @@ const ProductItem = (props) => {
       <td className="pl-0">
         <div className="dropdown">
           <a
-            className="btn"
+            className="btn pt-0"
             href="#"
             role="button"
             id="dropdownMenuLink"
@@ -52,26 +47,23 @@ const ProductItem = (props) => {
           </a>
 
           <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a className="dropdown-item" href="#">
+            <a
+              className="dropdown-item"
+              onClick={() => props.editModalHandle(props.product)}
+              href="#"
+            >
               Editar
             </a>
             <a
               className="dropdown-item text-danger"
               href="#"
-              data-toggle="modal"
-              data-target="#deleteProductModal"
+              onClick={() => props.deleteModalHanle(props.product._id)}
             >
               Eliminar
               <TrashIcon className="ml-1 text-danger" />
             </a>
           </div>
         </div>
-        <DeleteModal
-          id="deleteProductModal"
-          warningText="¿Desea eliminar este producto?"
-          handleSubmit={() => deleteHandle(props.product._id)}
-          loading={loading}
-        />
       </td>
     </tr>
   );

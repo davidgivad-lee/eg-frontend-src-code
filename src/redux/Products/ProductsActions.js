@@ -20,7 +20,8 @@ const saveProduct = (product) => async (dispatch, getState) => {
     const {
       userSignin: { userInfo },
     } = getState();
-    if (!product.id) {
+    console.log(product);
+    if (!product.productId) {
       const { data } = await axios.post("/api/products", product, {
         headers: {
           Authorization: "Bearer " + userInfo.token,
@@ -29,7 +30,7 @@ const saveProduct = (product) => async (dispatch, getState) => {
       dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: data });
     } else {
       const { data } = await axios.put(
-        "/api/products/" + product._id,
+        "/api/products/" + product.productId,
         product,
         {
           headers: {

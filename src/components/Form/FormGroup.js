@@ -16,6 +16,7 @@ const FormGroup = (props) => {
         placeholder={props.placeHolder}
         value={props.value}
         onChange={(e) => props.setValue(e.target.value)}
+        readOnly={props.onlyRead}
       />
       <div className={hasError(props.name) ? "invalid-feedback" : "hidden"}>
         {props.errorMsg}

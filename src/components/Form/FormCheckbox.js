@@ -35,7 +35,7 @@ const FormCheckbox = (props) => {
               <input
                 type="checkbox"
                 className="custom-control-input"
-                id={"customCheck" + i}
+                id={"customCheck" + i + props.id}
                 onChange={(e) => {
                   props.setValue(e.target.value);
                 }}

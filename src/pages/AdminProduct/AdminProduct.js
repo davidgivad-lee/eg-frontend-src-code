@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { listProducts } from "../../redux/Products/productsActions";
+import $ from "jquery";
 
+import { listProducts } from "../../redux/Products/productsActions";
+import DeleteModal from "../../components/Modal/DeleteModal";
+import EditProductModal from "./EditProductModal";
 import Spinner from "../../components/Spinner/Spinner";
 import configIcon from "../../assets/icons/config.svg";
 import { ReactComponent as PlusIcon } from "../../assets/icons/plusCircle.svg";
@@ -13,6 +16,8 @@ import "./AdminProduct.scss";
 
 const AdminProduct = () => {
   const [qtyListItem, setQtyListItem] = useState("10");
+  const [deleteProduct, setDeleteProduct] = useState("");
+  const [editProduct, setEditProduct] = useState({});
 
   const productList = useSelector((state) => state.productList);
   const productSave = useSelector((state) => state.productSave);
@@ -20,6 +25,9 @@ const AdminProduct = () => {
   const { message } = productDelete;
   const { product, success } = productSave;
   const { products, loading, error } = productList;
+  const loadingDelete = productDelete.loading;
+  const successDelete = productDelete.success;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,18 +49,25 @@ const AdminProduct = () => {
   const handleSearch = (text) => {
     //dispatch(productSearch(text))
   };
+  const deleteHandle = () => {
+    dispatch(deleteProduct(deleteProduct));
+  };
+  const deleteModalHanle = (productId) => {
+    setDeleteProduct(productId);
+    $("#deleteProductModal").modal("show");
+  };
+  const editModalHandle = (product) => {
+    setEditProduct(product);
+    $("#editProductModal").modal("show");
+  };
+
   return error ? (
     <div> error</div>
   ) : (
     <div className="container-fluid">
       <h4 className="d-inline-block my-3">Administrar los productos</h4>
       <div className="d-inline-block float-right mt-3 mr-3">
-        <a
-          type="button"
-          className=""
-          data-toggle="modal"
-          data-target="#addModal"
-        >
+        <a type="button" data-toggle="modal" data-target="#addModal">
           <PlusIcon className="text-primary" width="32" height="32" />
         </a>
       </div>
@@ -149,19 +164,40 @@ const AdminProduct = () => {
             </tr>
           </thead>
           <tbody>
-            {loading ? (
+            {products && products.length === 0 ? (
+              <tr>
+                <td>
+                  <p className="position-absolute"> No hay ningún producto </p>
+                </td>
+              </tr>
+            ) : loading ? (
               <tr>
                 <td>
                   <Spinner />
                 </td>
               </tr>
             ) : (
-              products.map((item, i) => <ProductItem key={i} product={item} />)
+              products.map((item, i) => (
+                <ProductItem
+                  key={i}
+                  id={i}
+                  product={item}
+                  deleteModalHanle={deleteModalHanle}
+                  editModalHandle={editModalHandle}
+                />
+              ))
             )}
           </tbody>
         </table>
       </div>
       <AddProductModal />
+      <DeleteModal
+        id="deleteProductModal"
+        warningText="¿Desea eliminar este producto?"
+        handleSubmit={deleteHandle}
+        loading={loadingDelete}
+      />
+      <EditProductModal id="editProductModal" product={editProduct} />
     </div>
   );
 };
