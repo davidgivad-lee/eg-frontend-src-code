@@ -8,7 +8,6 @@ import EditProductModal from "./EditProductModal";
 import Spinner from "../../components/Spinner/Spinner";
 import configIcon from "../../assets/icons/config.svg";
 import { ReactComponent as PlusIcon } from "../../assets/icons/plusCircle.svg";
-import productImg from "../../assets/product1.png";
 import sortIcon from "../../assets/icons/sort.png";
 import ProductItem from "./ProductItem";
 import AddProductModal from "./AddProductModal";
@@ -26,7 +25,6 @@ const AdminProduct = () => {
   const { product, success } = productSave;
   const { products, loading, error } = productList;
   const loadingDelete = productDelete.loading;
-  const successDelete = productDelete.success;
 
   const dispatch = useDispatch();
 

@@ -189,6 +189,7 @@ const EditProductModal = (props) => {
                 setValue={setProductId}
                 checkError={hasError}
                 errorMsg={errorForm.id}
+                inputId="edit"
               />
               <FormGroup
                 name={"name"}
@@ -198,6 +199,7 @@ const EditProductModal = (props) => {
                 setValue={setName}
                 checkError={hasError}
                 errorMsg={errorForm.name}
+                inputId="edit"
               />
               <FormGroup
                 name={"nameDetail"}
@@ -207,6 +209,7 @@ const EditProductModal = (props) => {
                 setValue={setNameDetail}
                 checkError={hasError}
                 errorMsg={errorForm.nameDetail}
+                inputId="edit"
               />
               <FormGroup
                 name={"description"}
@@ -216,6 +219,7 @@ const EditProductModal = (props) => {
                 setValue={setDescription}
                 checkError={hasError}
                 errorMsg={errorForm.description}
+                inputId="edit"
               />
               <FormGroup
                 name={"price"}
@@ -225,6 +229,7 @@ const EditProductModal = (props) => {
                 setValue={setPrice}
                 checkError={hasError}
                 errorMsg={errorForm.price}
+                inputId="edit"
               />
               <FormGroup
                 name={"wholePrice"}
@@ -234,6 +239,7 @@ const EditProductModal = (props) => {
                 setValue={setWholePrice}
                 checkError={hasError}
                 errorMsg={errorForm.wholePrice}
+                inputId="edit"
               />
               <FormGroup
                 name={"rating"}
@@ -243,6 +249,7 @@ const EditProductModal = (props) => {
                 setValue={setRating}
                 checkError={hasError}
                 errorMsg={errorForm.rating}
+                inputId="edit"
               />
               <FormCheckbox
                 id={props.id}
@@ -254,6 +261,7 @@ const EditProductModal = (props) => {
                 setValue={selectColors}
                 checkError={hasError}
                 errorMsg={errorForm.colors}
+                inputId="edit"
               />
               <FormSelect
                 name={"category"}
@@ -263,6 +271,7 @@ const EditProductModal = (props) => {
                 setValue={setCategory}
                 checkError={hasError}
                 errorMsg={errorForm.category}
+                inputId="edit"
               />
               <FormGroup
                 name={"height"}
@@ -272,6 +281,7 @@ const EditProductModal = (props) => {
                 setValue={setHeight}
                 checkError={hasError}
                 errorMsg={errorForm.height}
+                inputId="edit"
               />
               <FormGroup
                 name={"width"}
@@ -281,6 +291,7 @@ const EditProductModal = (props) => {
                 setValue={setWidth}
                 checkError={hasError}
                 errorMsg={errorForm.width}
+                inputId="edit"
               />
               <FormGroup
                 name={"length"}
@@ -290,6 +301,7 @@ const EditProductModal = (props) => {
                 setValue={setLength}
                 checkError={hasError}
                 errorMsg={errorForm.length}
+                inputId="edit"
               />
               <FormUpload
                 name={"photos"}
@@ -299,6 +311,7 @@ const EditProductModal = (props) => {
                 valueName={photoName}
                 setValue={uploadFileHandler}
                 uploadingError={uploadingError}
+                inputId="edit"
               />
             </form>
           </div>

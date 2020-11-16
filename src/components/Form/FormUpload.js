@@ -15,7 +15,7 @@ const FormUpload = (props) => {
         className={
           hasError ? "custom-file-input is-invalid" : "custom-file-input"
         }
-        id={props.name + "Input"}
+        id={props.inputId + props.name + "Input"}
         onChange={props.setValue}
       />
       <label className="custom-file-label mt-4" htmlFor={props.name + "Input"}>

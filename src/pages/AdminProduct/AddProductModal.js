@@ -43,6 +43,7 @@ const AddProductModal = (props) => {
   }, [product]);
 
   const selectColors = (colorSelected) => {
+    console.log(colorSelected);
     const index = colors.indexOf(colorSelected);
     let listColors = colors;
     if (index === -1) {
@@ -225,6 +226,7 @@ const AddProductModal = (props) => {
                 setValue={selectColors}
                 checkError={hasError}
                 errorMsg={errorForm.colors}
+                inputId="add"
               />
               <FormSelect
                 name="category"

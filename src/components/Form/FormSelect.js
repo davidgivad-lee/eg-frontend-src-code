@@ -11,7 +11,7 @@ const FormSelect = (props) => {
         className={
           hasError(props.name) ? "form-control is-invalid" : "form-control"
         }
-        id={props.name + "Input"}
+        id={props.inputId + props.name + "Input"}
         defaultValue="default"
         onChange={(e) => props.setValue(e.target.value)}
       >

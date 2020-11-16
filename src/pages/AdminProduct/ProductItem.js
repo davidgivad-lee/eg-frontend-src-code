@@ -1,12 +1,7 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
 
 import optionIcon from "../../assets/icons/option.svg";
 import { ReactComponent as TrashIcon } from "../../assets/icons/trash.svg";
-import { deleteProduct } from "../../redux/Products/productsActions";
-
-import Button from "../../components/Button/Button";
-import { ReactComponent as AlertIcon } from "../../assets/icons/alert.svg";
 
 const ProductItem = (props) => {
   return (
@@ -31,7 +26,7 @@ const ProductItem = (props) => {
       <td>
         {props.product.wholesalePrice ? props.product.wholesalePrice : "-"}
       </td>
-      <td>{props.product.color ? props.product.color[0] + "..." : "-"}</td>
+      <td>{props.product.colors[0] ? props.product.colors[0] + "..." : "-"}</td>
       <td className="pl-0">
         <div className="dropdown">
           <a
