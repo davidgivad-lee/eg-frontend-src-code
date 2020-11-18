@@ -25,7 +25,6 @@ const AddProductModal = (props) => {
   const [width, setWidth] = useState("");
   const [height, setHeight] = useState("");
   const [photos, setPhotos] = useState([]);
-  const [photoName, setPhotoName] = useState("");
 
   const [errorForm, addError] = useState({});
   const [uploadingError, setUploadingError] = useState("");
@@ -47,6 +46,8 @@ const AddProductModal = (props) => {
   useEffect(() => {
     if (success) {
       $("#addModal").modal("hide");
+      // should not reload and clear all inputs including previews list...
+      window.location.reload();
     }
     return () => {};
   }, [product]);
@@ -77,7 +78,6 @@ const AddProductModal = (props) => {
     if (category === "") {
       errors.category = "Debes seleccionar una categoría.";
     }
-    console.log(photos);
     if (photos.length === 0) {
       setUploadingError("Debes agregar una foto.");
     } else {
@@ -99,7 +99,7 @@ const AddProductModal = (props) => {
           length,
           width,
           height,
-          photoList,
+          photos: photoList,
         })
       );
     } else {
@@ -269,7 +269,6 @@ const AddProductModal = (props) => {
                 name="photos"
                 labelName="Fotos"
                 placeHolder="Seleccionar fotos (jpg o png)"
-                valueName={photoName}
                 uploadingError={uploadingError}
                 value={photos}
                 setValue={setPhotos}

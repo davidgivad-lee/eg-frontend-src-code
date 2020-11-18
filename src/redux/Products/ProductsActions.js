@@ -20,7 +20,6 @@ const saveProduct = (product) => async (dispatch, getState) => {
     const {
       userSignin: { userInfo },
     } = getState();
-    console.log(product);
     if (!product.productId) {
       const { data } = await axios.post("/api/products", product, {
         headers: {

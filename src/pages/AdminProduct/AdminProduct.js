@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import $ from "jquery";
 
-import { listProducts } from "../../redux/Products/productsActions";
+import {
+  listProducts,
+  deleteProduct,
+} from "../../redux/Products/productsActions";
 import DeleteModal from "../../components/Modal/DeleteModal";
 import EditProductModal from "./EditProductModal";
 import Spinner from "../../components/Spinner/Spinner";
@@ -15,7 +18,7 @@ import "./AdminProduct.scss";
 
 const AdminProduct = () => {
   const [qtyListItem, setQtyListItem] = useState("10");
-  const [deleteProduct, setDeleteProduct] = useState("");
+  const [productToDelete, setDeleteProduct] = useState("");
   const [editProduct, setEditProduct] = useState({});
 
   const productList = useSelector((state) => state.productList);
@@ -48,7 +51,7 @@ const AdminProduct = () => {
     //dispatch(productSearch(text))
   };
   const deleteHandle = () => {
-    dispatch(deleteProduct(deleteProduct));
+    dispatch(deleteProduct(productToDelete));
   };
   const deleteModalHanle = (productId) => {
     setDeleteProduct(productId);
