@@ -28,13 +28,21 @@ const AddProductModal = (props) => {
   const [photoName, setPhotoName] = useState("");
 
   const [errorForm, addError] = useState({});
-  const [uploadingError, setUploadingError] = useState([]);
+  const [uploadingError, setUploadingError] = useState("");
   const productSave = useSelector((state) => state.productSave);
   const { loading, product, success, error } = productSave;
 
   const dispatch = useDispatch();
 
   const ref = useRef(null);
+
+  let inputRefs = {};
+
+  const setInputRefs = (element) => {
+    if (element) {
+      inputRefs[element.id] = element;
+    }
+  };
 
   useEffect(() => {
     if (success) {
@@ -57,7 +65,6 @@ const AddProductModal = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     let errors = {};
-    console.log(photos);
     if (name === "") {
       errors.name = "Debes ingresar un nombre para el producto.";
     }
@@ -70,11 +77,15 @@ const AddProductModal = (props) => {
     if (category === "") {
       errors.category = "Debes seleccionar una categoría.";
     }
-    if (photos === "") {
+    console.log(photos);
+    if (photos.length === 0) {
       setUploadingError("Debes agregar una foto.");
+    } else {
+      setUploadingError("");
     }
     addError(errors);
     if (Object.keys(errors).length === 0 && errors.constructor === Object) {
+      const photoList = photos.map((item) => item.uploadName);
       dispatch(
         saveProduct({
           name,
@@ -88,9 +99,16 @@ const AddProductModal = (props) => {
           length,
           width,
           height,
-          photos,
+          photoList,
         })
       );
+    } else {
+      const inputName = "add" + Object.keys(errors)[0] + "Input";
+      const aux = Object.entries(inputRefs).filter(([key, value]) => {
+        return value && key === inputName;
+      });
+      aux[0][1].focus();
+      //inputRefs.addnameInput.focus()
     }
   };
 
@@ -139,6 +157,8 @@ const AddProductModal = (props) => {
                 setValue={setName}
                 checkError={hasError}
                 errorMsg={errorForm.name}
+                setRef={setInputRefs}
+                inputId="add"
               />
               <FormGroup
                 name="nameDetail"
@@ -148,6 +168,7 @@ const AddProductModal = (props) => {
                 setValue={setNameDetail}
                 checkError={hasError}
                 errorMsg={errorForm.nameDetail}
+                inputId="add"
               />
               <FormGroup
                 name="description"
@@ -157,6 +178,9 @@ const AddProductModal = (props) => {
                 setValue={setDescription}
                 checkError={hasError}
                 errorMsg={errorForm.description}
+                textArea={true}
+                setRef={setInputRefs}
+                inputId="add"
               />
               <FormGroup
                 name="price"
@@ -166,6 +190,8 @@ const AddProductModal = (props) => {
                 setValue={setPrice}
                 checkError={hasError}
                 errorMsg={errorForm.price}
+                setRef={setInputRefs}
+                inputId="add"
               />
               <FormGroup
                 name="wholePrice"
@@ -175,6 +201,7 @@ const AddProductModal = (props) => {
                 setValue={setWholePrice}
                 checkError={hasError}
                 errorMsg={errorForm.wholePrice}
+                inputId="add"
               />
               <FormGroup
                 name="rating"
@@ -184,6 +211,7 @@ const AddProductModal = (props) => {
                 setValue={setRating}
                 checkError={hasError}
                 errorMsg={errorForm.rating}
+                inputId="add"
               />
               <FormCheckbox
                 name="colors"
@@ -204,6 +232,8 @@ const AddProductModal = (props) => {
                 setValue={setCategory}
                 checkError={hasError}
                 errorMsg={errorForm.category}
+                setRef={setInputRefs}
+                inputId="add"
               />
               <FormGroup
                 name="height"
@@ -213,6 +243,7 @@ const AddProductModal = (props) => {
                 setValue={setHeight}
                 checkError={hasError}
                 errorMsg={errorForm.height}
+                inputId="add"
               />
               <FormGroup
                 name="width"
@@ -222,6 +253,7 @@ const AddProductModal = (props) => {
                 setValue={setWidth}
                 checkError={hasError}
                 errorMsg={errorForm.width}
+                inputId="add"
               />
               <FormGroup
                 name="length"
@@ -231,6 +263,7 @@ const AddProductModal = (props) => {
                 setValue={setLength}
                 checkError={hasError}
                 errorMsg={errorForm.length}
+                inputId="add"
               />
               <FileUploader
                 name="photos"
@@ -240,6 +273,8 @@ const AddProductModal = (props) => {
                 uploadingError={uploadingError}
                 value={photos}
                 setValue={setPhotos}
+                setRef={setInputRefs}
+                inputId="add"
               />
             </form>
           </div>

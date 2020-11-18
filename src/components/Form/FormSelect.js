@@ -14,8 +14,9 @@ const FormSelect = (props) => {
         id={props.inputId + props.name + "Input"}
         defaultValue="default"
         onChange={(e) => props.setValue(e.target.value)}
+        ref={props.setRef}
       >
-        <option value="default text-muted" disabled>
+        <option className="text-muted" disabled value="default">
           Seleccionar una categoría
         </option>
         {props.options.map((item, i) => (

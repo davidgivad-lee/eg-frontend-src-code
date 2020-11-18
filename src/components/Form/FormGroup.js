@@ -7,17 +7,34 @@ const FormGroup = (props) => {
       <label className="font-13 text-black-50" htmlFor={props.name + "Input"}>
         {props.labelName + ":"}
       </label>
-      <input
-        type="text"
-        className={
-          hasError(props.name) ? "form-control is-invalid" : "form-control"
-        }
-        id={props.inputId + props.name + "Input"}
-        placeholder={props.placeHolder}
-        value={props.value}
-        onChange={(e) => props.setValue(e.target.value)}
-        readOnly={props.onlyRead}
-      />
+      {props.textArea ? (
+        <textarea
+          type="text"
+          className={
+            hasError(props.name) ? "form-control is-invalid" : "form-control"
+          }
+          ref={props.setRef}
+          id={props.inputId + props.name + "Input"}
+          placeholder={props.placeHolder}
+          value={props.value}
+          onChange={(e) => props.setValue(e.target.value)}
+          readOnly={props.onlyRead}
+        />
+      ) : (
+        <input
+          type="text"
+          className={
+            hasError(props.name) ? "form-control is-invalid" : "form-control"
+          }
+          ref={props.setRef}
+          id={props.inputId + props.name + "Input"}
+          placeholder={props.placeHolder}
+          value={props.value}
+          onChange={(e) => props.setValue(e.target.value)}
+          readOnly={props.onlyRead}
+        />
+      )}
+
       <div className={hasError(props.name) ? "invalid-feedback" : "hidden"}>
         {props.errorMsg}
       </div>
