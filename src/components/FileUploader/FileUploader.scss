@@ -1,0 +1,21 @@
+.preview-img {
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+}
+
+.img-container {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.delete-icon {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+}
+
+.border-error {
+  border: 2px solid #ff3333;
+  border-radius: 15px;
+}

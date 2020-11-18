@@ -8,9 +8,9 @@ import { saveProduct } from "../../redux/Products/productsActions";
 import FormGroup from "../../components/Form/FormGroup";
 import FormSelect from "../../components/Form/FormSelect";
 import FormCheckbox from "../../components/Form/FormCheckbox";
-import FormUpload from "../../components/Form/FormUpload";
 import Button from "../../components/Button/Button";
 import CancelButton from "../../components/Button/CancelButton";
+import FileUploader from "../../components/FileUploader/FileUploader";
 
 const AddProductModal = (props) => {
   const [name, setName] = useState("");
@@ -24,10 +24,11 @@ const AddProductModal = (props) => {
   const [length, setLength] = useState("");
   const [width, setWidth] = useState("");
   const [height, setHeight] = useState("");
-  const [photos, setPhotos] = useState("");
+  const [photos, setPhotos] = useState([]);
   const [photoName, setPhotoName] = useState("");
+
   const [errorForm, addError] = useState({});
-  const [uploadingError, setUploadingError] = useState("");
+  const [uploadingError, setUploadingError] = useState([]);
   const productSave = useSelector((state) => state.productSave);
   const { loading, product, success, error } = productSave;
 
@@ -43,7 +44,6 @@ const AddProductModal = (props) => {
   }, [product]);
 
   const selectColors = (colorSelected) => {
-    console.log(colorSelected);
     const index = colors.indexOf(colorSelected);
     let listColors = colors;
     if (index === -1) {
@@ -52,12 +52,12 @@ const AddProductModal = (props) => {
       listColors.splice(index, 1);
     }
     setColors([...listColors]);
-    console.log(colors.length);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
     let errors = {};
+    console.log(photos);
     if (name === "") {
       errors.name = "Debes ingresar un nombre para el producto.";
     }
@@ -100,38 +100,6 @@ const AddProductModal = (props) => {
 
   const hasError = (key) => {
     return errorForm.hasOwnProperty(key);
-  };
-
-  const uploadFileHandler = (e) => {
-    const file = e.target.files[0];
-    const bodyFormData = new FormData();
-    bodyFormData.append("image", file);
-    setUploadingError("");
-    axios
-      .post("/api/uploads", bodyFormData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        onUploadProgress: (ProgressEvent) => {
-          console.log(
-            "Upload: " +
-              Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100) +
-              "%"
-          );
-        },
-      })
-      .then((response) => {
-        setPhotos(response.data);
-        setPhotoName(file.name);
-        addError({});
-      })
-      .catch((err) => {
-        if (err.response) {
-          setUploadingError(err.response.data.error);
-        } else {
-          console.log(err);
-        }
-      });
   };
 
   return (
@@ -264,14 +232,14 @@ const AddProductModal = (props) => {
                 checkError={hasError}
                 errorMsg={errorForm.length}
               />
-              <FormUpload
+              <FileUploader
                 name="photos"
                 labelName="Fotos"
-                placeHolder="Seleccionar fotos (jpg o svg)"
-                value={photos}
+                placeHolder="Seleccionar fotos (jpg o png)"
                 valueName={photoName}
-                setValue={uploadFileHandler}
                 uploadingError={uploadingError}
+                value={photos}
+                setValue={setPhotos}
               />
             </form>
           </div>

@@ -11,6 +11,7 @@ import FormCheckbox from "../../components/Form/FormCheckbox";
 import FormUpload from "../../components/Form/FormUpload";
 import Button from "../../components/Button/Button";
 import CancelButton from "../../components/Button/CancelButton";
+import FileUploader from "../../components/FileUploader/FileUploader";
 
 const EditProductModal = (props) => {
   const [productId, setProductId] = useState("");
@@ -313,6 +314,7 @@ const EditProductModal = (props) => {
                 uploadingError={uploadingError}
                 inputId="edit"
               />
+              <FileUploader />
             </form>
           </div>
           <div className="row p-4 mx-0 border-top">
