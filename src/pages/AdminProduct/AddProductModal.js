@@ -65,6 +65,7 @@ const AddProductModal = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log(photos);
     let errors = {};
     if (name === "") {
       errors.name = "Debes ingresar un nombre para el producto.";

@@ -26,8 +26,8 @@ const EditProductModal = (props) => {
   const [length, setLength] = useState("");
   const [width, setWidth] = useState("");
   const [height, setHeight] = useState("");
-  const [photos, setPhotos] = useState("");
-  const [photoName, setPhotoName] = useState("");
+  const [photos, setPhotos] = useState([]);
+  const [previews, setPreviews] = useState([]);
   const [errorForm, addError] = useState({});
   const [uploadingError, setUploadingError] = useState("");
   const productSave = useSelector((state) => state.productSave);
@@ -50,7 +50,15 @@ const EditProductModal = (props) => {
     setLength(props.product.length || "");
     setHeight(props.product.height || "");
     setWidth(props.product.width || "");
-    setPhotos(props.product.photos);
+    setPhotos(
+      (props.product.photos &&
+        props.product.photos.map((item) => ({
+          name: item,
+          uploadName: item,
+        }))) ||
+        []
+    );
+    setPreviews(props.product.photos || []);
     addError({});
   }, [props.product]);
 
@@ -86,12 +94,14 @@ const EditProductModal = (props) => {
     if (category === "") {
       errors.category = "Debes seleccionar una categoría.";
     }
-    if (photos === "") {
+    if (photos.length === 0) {
       setUploadingError("Debes agregar una foto.");
+    } else {
+      setUploadingError("");
     }
     addError(errors);
-
     if (Object.keys(errors).length === 0 && errors.constructor === Object) {
+      const photoList = photos.map((item) => item.uploadName);
       dispatch(
         saveProduct({
           productId,
@@ -106,7 +116,7 @@ const EditProductModal = (props) => {
           length,
           width,
           height,
-          photos,
+          photos: photoList,
         })
       );
     }
@@ -118,38 +128,6 @@ const EditProductModal = (props) => {
 
   const hasError = (key) => {
     return errorForm.hasOwnProperty(key);
-  };
-
-  const uploadFileHandler = (e) => {
-    const file = e.target.files[0];
-    const bodyFormData = new FormData();
-    bodyFormData.append("image", file);
-    setUploadingError("");
-    axios
-      .post("/api/uploads", bodyFormData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        onUploadProgress: (ProgressEvent) => {
-          console.log(
-            "Upload: " +
-              Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100) +
-              "%"
-          );
-        },
-      })
-      .then((response) => {
-        setPhotos(response.data);
-        setPhotoName(file.name);
-        addError({});
-      })
-      .catch((err) => {
-        if (err.response) {
-          setUploadingError(err.response.data.error);
-        } else {
-          console.log(err);
-        }
-      });
   };
 
   return (
@@ -304,17 +282,16 @@ const EditProductModal = (props) => {
                 errorMsg={errorForm.length}
                 inputId="edit"
               />
-              <FormUpload
-                name={"photos"}
+              <FileUploader
+                name="photos"
                 labelName="Fotos"
-                placeHolder="Seleccionar fotos (jpg o svg)"
-                value={photos}
-                valueName={photoName}
-                setValue={uploadFileHandler}
+                placeHolder="Seleccionar fotos (jpg o png)"
                 uploadingError={uploadingError}
+                value={photos}
+                setValue={setPhotos}
                 inputId="edit"
+                imgPreviews={previews}
               />
-              <FileUploader />
             </form>
           </div>
           <div className="row p-4 mx-0 border-top">

@@ -5,11 +5,13 @@ import { ReactComponent as CancelIcon } from "../../assets/icons/xCircle.svg";
 import "./FileUploader.scss";
 
 const FileUploader = (props) => {
-  const [imagePreviews, setImagePreviews] = useState([]);
+  const [imagePreviews, setImagePreviews] = useState(props.value || []);
   const [uploadErrors, setUploadErrors] = useState([]);
 
   const [uploadedImage, setUploadedImage] = useState("");
   const [errorResponse, setErrorResponse] = useState("");
+
+  const { imgPreviews } = props;
 
   useEffect(() => {
     if (Object.keys(uploadedImage).length > 0) {
@@ -26,6 +28,18 @@ const FileUploader = (props) => {
       setUploadErrors(listError);
     }
   }, [errorResponse]);
+
+  useEffect(() => {
+    if (imgPreviews && imgPreviews.length > 0) {
+      const prev = imgPreviews.map((item) => ({
+        file: {
+          name: item,
+        },
+        preview: item,
+      }));
+      setImagePreviews(prev);
+    }
+  }, [imgPreviews]);
 
   const handleChange = (e) => {
     const fileList = Array.from(e.target.files);
@@ -72,7 +86,7 @@ const FileUploader = (props) => {
   };
 
   const checkErrorFile = (file) => {
-    return uploadErrors.indexOf(file.name) !== -1;
+    if (file) return uploadErrors.indexOf(file.name) !== -1;
   };
 
   const handleDeleteImage = (file) => {
@@ -143,8 +157,12 @@ const FileUploader = (props) => {
               >
                 <CancelIcon className="text-muted" width="16" height="16" />
               </a>
-              <div className="d-flex img-container">
-                <img className="d-block w-auto h-100" src={item.preview} />
+              <div className="d-flex preview-container">
+                <img
+                  className="d-block w-auto h-100"
+                  src={item.preview}
+                  alt="Preview image"
+                />
               </div>
             </div>
           ))}
