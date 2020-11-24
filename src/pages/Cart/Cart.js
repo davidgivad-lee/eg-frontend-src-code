@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import CartItem from "./CartItem";
 import "./Cart.scss";
@@ -20,6 +20,7 @@ function Cart(props) {
     }
     return sum;
   };
+
   return (
     <div className="container-fluid px-3">
       <h3 className="mb-4"> Mi carrito ({cartItems.length} articulos)</h3>
@@ -59,7 +60,7 @@ function Cart(props) {
                 <p className="font-weight-bold text-secondary">IVA (22%):</p>
               </div>
               <div className="col-6 text-right">
-                $ {cartItems.length > 0 && subTotal() * 0.22}
+                $ {cartItems.length > 0 && Math.trunc(subTotal() * 0.22)}
               </div>
             </div>
             <div className="row border-bottom  mb-4">

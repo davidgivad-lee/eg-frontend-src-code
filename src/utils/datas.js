@@ -22,4 +22,7 @@ const listColors = [
   { color: "Grey", name: "Gris", hex: "#808080" },
   { color: "Black", name: "Negro", hex: "#000000" },
 ];
-export { categories, listColors };
+
+const ratingValues = [1, 2, 3, 4, 5];
+
+export { categories, listColors, ratingValues };

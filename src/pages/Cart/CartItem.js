@@ -6,7 +6,6 @@ import Counter from "../../components/Counter/Counter";
 import { addToCart } from "../../redux/Cart/cartActions";
 import DeleteModal from "../../components/Modal/DeleteModal";
 import { removeFromCart } from "../../redux/Cart/cartActions";
-import productImg from "../../assets/product1.png";
 import "./Cart.scss";
 
 const CartItem = (props) => {
@@ -16,15 +15,22 @@ const CartItem = (props) => {
   const quantity = useQty(item.qty);
 
   const decrement = () => {
-    const qty = quantity.value - 1;
-    quantity.setValue(qty);
-    dispatch(addToCart(item.product, qty));
+    if (quantity.value > 1) {
+      const qty = quantity.value - 1;
+      quantity.setValue(qty);
+      dispatch(addToCart(item.product, qty));
+    }
   };
 
   const increment = () => {
     const qty = quantity.value + 1;
     quantity.setValue(qty);
     dispatch(addToCart(item.product, qty));
+  };
+
+  const onChange = (e) => {
+    quantity.onChange(e);
+    dispatch(addToCart(item.product, e.target.value));
   };
 
   const removeFromCartHandler = (productId) => {
@@ -36,7 +42,7 @@ const CartItem = (props) => {
       <div className="col-4 col-sm-3 col-md-1 p-0">
         <img
           className="productImg w-100 my-auto"
-          src={productImg}
+          src={item.photos && item.photos[0]}
           alt="Producto..."
         />
       </div>
@@ -67,6 +73,7 @@ const CartItem = (props) => {
               qty={quantity.value}
               increment={increment}
               decrement={decrement}
+              onChange={onChange}
             />
           </div>
         </div>
