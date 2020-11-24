@@ -5,6 +5,8 @@ import { update } from "../../redux/User/userActions";
 import FormGroup from "../../components/Form/FormGroup";
 import Button from "../../components/Button/Button";
 import checkCircle from "../../assets/icons/checkCircle.svg";
+import { ReactComponent as CircleIcon } from "../../assets/icons/fillCircle.svg";
+import "./Checkout.scss";
 
 const CheckoutUser = (props) => {
   const userSignin = useSelector((state) => state.userSignin);
@@ -23,6 +25,7 @@ const CheckoutUser = (props) => {
     if (userInfoUpdate && !successShipping && !successInvoice) {
       props.collapseRef("collapseOne");
       props.collapseRef("collapseTwo");
+      props.setCompletee(true);
     }
     return () => {
       //
@@ -57,21 +60,32 @@ const CheckoutUser = (props) => {
     <div className="card py-4 border-top-0 border-right-0 border-left-0 border-bottom">
       <div className="card-header bg-transparent border-0 p-0" id="headingOne">
         <button
-          className="btn btn-block p-0 text-left text-decoration-none shadow-none"
+          className="btn btn-block p-0 text-left text-decoration-none shadow-none position-relative"
           type="button"
           data-toggle="collapse"
           data-target="#collapseOne"
           aria-expanded="true"
           aria-controls="collapseOne"
         >
-          <img
-            src={checkCircle}
-            className="mb-2 text-secondary"
-            alt=""
-            width="32"
-            height="32"
-            title="Bootstrap"
-          />
+          {props.complete ? (
+            <img
+              src={checkCircle}
+              className="mb-2 text-secondary"
+              alt=""
+              width="32"
+              height="32"
+              title="Bootstrap"
+            />
+          ) : (
+            <React.Fragment>
+              <CircleIcon
+                className="mb-2 text-secondary"
+                width="32"
+                height="32"
+              />
+              <p className="text-white font-19 titleIcon">1</p>
+            </React.Fragment>
+          )}
           <h3 className="d-inline-block ml-4 mb-0 font-weight-light text-body">
             Cliente
           </h3>
@@ -111,6 +125,7 @@ const CheckoutUser = (props) => {
                 setValue={setFirstName}
                 checkError={hasError}
                 errorMsg={errorForm.firstName}
+                inputId="user"
               />
               <FormGroup
                 customStyle="col-md-6"
@@ -121,6 +136,7 @@ const CheckoutUser = (props) => {
                 setValue={setLastName}
                 checkError={hasError}
                 errorMsg={errorForm.lastName}
+                inputId="user"
               />
             </div>
             <FormGroup
@@ -131,6 +147,7 @@ const CheckoutUser = (props) => {
               setValue={setTelNumber}
               checkError={hasError}
               errorMsg={errorForm.telNumber}
+              inputId="user"
             />
           </form>
         </div>

@@ -5,6 +5,8 @@ import { update } from "../../redux/User/userActions";
 import Button from "../../components/Button/Button";
 import FormGroup from "../../components/Form/FormGroup";
 import checkCircle from "../../assets/icons/checkCircle.svg";
+import { ReactComponent as CircleIcon } from "../../assets/icons/fillCircle.svg";
+import "./Checkout.scss";
 
 const CheckoutShipping = (props) => {
   const userSignin = useSelector((state) => state.userSignin);
@@ -21,7 +23,6 @@ const CheckoutShipping = (props) => {
   const [postalCode, setPostalCode] = useState(
     userInfo.shipping.postalCode || ""
   );
-
   const [errorForm, addError] = useState({});
 
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const CheckoutShipping = (props) => {
     if (userInfoUpdate && successShipping && !successInvoice) {
       props.collapseRef("collapseTwo");
       props.collapseRef("collapseThree");
+      props.setComplete(true);
     }
     return () => {
       //
@@ -72,21 +74,33 @@ const CheckoutShipping = (props) => {
       <div className="card-header bg-transparent border-0 p-0" id="headingTwo">
         <h2 className="mb-0">
           <button
-            className="btn btn-block p-0 text-left text-decoration-none shadow-none"
+            className="btn btn-block p-0 text-left text-decoration-none shadow-none position-relative"
             type="button"
             data-toggle="collapse"
             data-target="#collapseTwo"
             aria-controls="collapseTwo"
             aria-expanded="false"
+            disabled={!props.previous}
           >
-            <img
-              src={checkCircle}
-              className="mb-2 text-secondary"
-              alt=""
-              width="32"
-              height="32"
-              title="Bootstrap"
-            />
+            {props.complete ? (
+              <img
+                src={checkCircle}
+                className="mb-2 text-secondary"
+                alt="img"
+                width="32"
+                height="32"
+                title="Bootstrap"
+              />
+            ) : (
+              <React.Fragment>
+                <CircleIcon
+                  className="mb-2 text-secondary"
+                  width="32"
+                  height="32"
+                />
+                <p className="text-white font-19 titleIcon">2</p>
+              </React.Fragment>
+            )}
             <h3 className="d-inline-block ml-4 mb-0 font-weight-light text-body">
               Envío
             </h3>
@@ -112,6 +126,7 @@ const CheckoutShipping = (props) => {
               setValue={setAddress}
               checkError={hasError}
               errorMsg={errorForm.address}
+              inputId="shipping"
             />
             <FormGroup
               name="extAddress"
@@ -121,6 +136,7 @@ const CheckoutShipping = (props) => {
               setValue={setExtAddress}
               checkError={hasError}
               errorMsg={errorForm.extAddress}
+              inputId="shipping"
             />
             <FormGroup
               name="city"
@@ -130,6 +146,7 @@ const CheckoutShipping = (props) => {
               setValue={setCity}
               checkError={hasError}
               errorMsg={errorForm.city}
+              inputId="shipping"
             />
             <div className="form-row">
               <FormGroup
@@ -141,6 +158,7 @@ const CheckoutShipping = (props) => {
                 setValue={setProvince}
                 checkError={hasError}
                 errorMsg={errorForm.province}
+                inputId="shipping"
               />
               <FormGroup
                 customStyle="col-md-6"
@@ -151,6 +169,7 @@ const CheckoutShipping = (props) => {
                 setValue={setPostalCode}
                 checkError={hasError}
                 errorMsg={errorForm.postalCode}
+                inputId="shipping"
               />
             </div>
           </form>

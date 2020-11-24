@@ -6,6 +6,8 @@ import Button from "../../components/Button/Button";
 import CancelButton from "../../components/Button/CancelButton";
 import FormGroup from "../../components/Form/FormGroup";
 import checkCircle from "../../assets/icons/checkCircle.svg";
+import { ReactComponent as CircleIcon } from "../../assets/icons/fillCircle.svg";
+import "./Checkout.scss";
 
 const CheckoutInvoice = (props) => {
   const userSignin = useSelector((state) => state.userSignin);
@@ -22,7 +24,6 @@ const CheckoutInvoice = (props) => {
   const [rut, setRut] = useState(userInfo.invoice.rut || "");
   const [address, setAddress] = useState(userInfo.invoice.address || "");
   const [city, setCity] = useState(userInfo.invoice.city || "");
-
   const [errorForm, addError] = useState({});
 
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const CheckoutInvoice = (props) => {
     if (userInfoUpdate && successInvoice) {
       props.collapseRef("collapseThree");
       props.collapseRef("collapseFour");
+      props.setComplete(true);
     }
     return () => {
       //
@@ -41,6 +43,7 @@ const CheckoutInvoice = (props) => {
     e.preventDefault();
     props.collapseRef("collapseThree");
     props.collapseRef("collapseFour");
+    props.setComplete(true);
   };
 
   const submitHandler = (e) => {
@@ -87,21 +90,33 @@ const CheckoutInvoice = (props) => {
       >
         <h2 className="mb-0">
           <button
-            className="btn btn-block p-0 text-left text-decoration-none shadow-none"
+            className="btn btn-block p-0 text-left text-decoration-none shadow-none position-relative"
             type="button"
             data-toggle="collapse"
             data-target="#collapseThree"
             aria-controls="collapseThree"
             aria-expanded="false"
+            disabled={!props.previous}
           >
-            <img
-              src={checkCircle}
-              className="mb-2 text-secondary"
-              alt=""
-              width="32"
-              height="32"
-              title="Bootstrap"
-            />
+            {props.complete ? (
+              <img
+                src={checkCircle}
+                className="mb-2 text-secondary"
+                alt=""
+                width="32"
+                height="32"
+                title="Bootstrap"
+              />
+            ) : (
+              <React.Fragment>
+                <CircleIcon
+                  className="mb-2 text-secondary"
+                  width="32"
+                  height="32"
+                />
+                <p className="text-white font-19 titleIcon">3</p>
+              </React.Fragment>
+            )}
             <h3 className="d-inline-block ml-4 mb-0 font-weight-light text-body">
               Facturación
             </h3>
@@ -130,6 +145,7 @@ const CheckoutInvoice = (props) => {
               setValue={setCompanyName}
               checkError={hasError}
               errorMsg={errorForm.companyName}
+              inputId="invoice"
             />
             <FormGroup
               name="businessName"
@@ -139,6 +155,7 @@ const CheckoutInvoice = (props) => {
               setValue={setBusinessName}
               checkError={hasError}
               errorMsg={errorForm.businessName}
+              inputId="invoice"
             />
             <FormGroup
               name="rut"
@@ -148,6 +165,7 @@ const CheckoutInvoice = (props) => {
               setValue={setRut}
               checkError={hasError}
               errorMsg={errorForm.rut}
+              inputId="invoice"
             />
             <FormGroup
               name="address"
@@ -157,6 +175,7 @@ const CheckoutInvoice = (props) => {
               setValue={setAddress}
               checkError={hasError}
               errorMsg={errorForm.address}
+              inputId="invoice"
             />
             <FormGroup
               name="city"
@@ -166,6 +185,7 @@ const CheckoutInvoice = (props) => {
               setValue={setCity}
               checkError={hasError}
               errorMsg={errorForm.city}
+              inputId="invoice"
             />
           </form>
         </div>
