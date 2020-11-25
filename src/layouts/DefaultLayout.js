@@ -11,7 +11,7 @@ const DefaultLayout = (props) => {
           <img src={Logo} className="header-img" alt="logo" />
         </a>
       </div>
-      <div className="pb-c-60">{props.children}</div>
+      {props.children}
     </div>
   );
 };
