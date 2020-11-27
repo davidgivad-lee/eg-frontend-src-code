@@ -12,7 +12,7 @@ import "./Checkout.scss";
 const Checkout = (props) => {
   const [completeUser, setCompleteUser] = useState(false);
   const [completeShipping, setCompleteShipping] = useState(false);
-  const [completeInvoice, setCompleteInvoice] = useState(false);
+  const [completeInvoice, setCompleteInvoice] = useState(true);
   const [completePayment, setCompletePayment] = useState(false);
   const cart = useSelector((state) => state.cart);
 

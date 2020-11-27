@@ -5,6 +5,7 @@ import { cleanCart } from "../../redux/Cart/cartActions";
 import Button from "../../components/Button/Button";
 import checkCircle from "../../assets/icons/checkCircle.svg";
 import { ReactComponent as CircleIcon } from "../../assets/icons/fillCircle.svg";
+import CheckoutPaymentOption from "./CheckoutPaymentOption";
 import "./Checkout.scss";
 
 const CheckoutPayment = (props) => {
@@ -64,43 +65,8 @@ const CheckoutPayment = (props) => {
         ref={props.setRef}
       >
         <div className="card-body px-0 py-4">
-          Seleccione la forma de pago
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="exampleRadios"
-              id="radioAbitab"
-              value="option1"
-            />
-            <label className="form-check-label" htmlFor="radioAbitab">
-              Abitab
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="exampleRadios"
-              id="radioBank"
-              value="option2"
-            />
-            <label className="form-check-label" htmlFor="radioBank">
-              Transferencia bancaria
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="exampleRadios"
-              id="radioCash"
-              value="option2"
-            />
-            <label className="form-check-label" htmlFor="radioCash">
-              Pago en el local
-            </label>
-          </div>
+          <p className="font-15">Seleccione la forma de pago</p>
+          <CheckoutPaymentOption />
         </div>
 
         <div className="row">
