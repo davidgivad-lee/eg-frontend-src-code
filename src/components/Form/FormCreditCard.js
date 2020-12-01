@@ -1,51 +1,63 @@
 import React from "react";
 
-import { ReactComponent as LockIcon } from "../../assets/icons/lockFill.svg";
+import FormGroup from "../../components/Form/FormGroup";
 import "./Form.scss";
 
 const FormCreditCard = (props) => {
   return (
-    <form className="padding-x-45 ">
-      <div className="form-group row">
-        <div className="col-9 position-relative">
-          <label className="font-13 text-secondary" htmlFor="cardInput">
-            Número de tarjeta de crédita/débito
-          </label>
-          <input type="text" className="form-control" id="cardInput" />
-          <LockIcon
-            className="position-absolute lock-icon-position text-secondary"
-            width="16"
-            height="16"
+    <form className="padding-x-45 position-relative">
+      <div className="form-group row ">
+        <div className="col-9 ">
+          <FormGroup
+            name="cardNumber"
+            labelName="Número de tarjeta de crédita/débito"
+            placeHolder="XXXX XXXX XXXX XXXX"
+            value={props.cardNumber}
+            setValue={props.setCardNumber}
+            checkError={props.hasError}
+            errorMsg={props.errorForm.cardNumber}
+            inputId="add"
+            maxLength={16}
+            type="card"
           />
         </div>
         <div className="col-3 px-0">
-          <label className="font-13 text-secondary" htmlFor="expirationInput">
-            Vencimiento
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="expirationInput"
-            placeholder="Mes/Año"
+          <FormGroup
+            name="cardExpiration"
+            labelName="Vencimiento"
+            placeHolder="Mes/Año"
+            value={props.cardExpiration}
+            setValue={props.setCardExpiration}
+            checkError={props.hasError}
+            errorMsg={props.errorForm.cardExpiration}
+            inputId="add"
           />
         </div>
       </div>
       <div className="form-group row">
         <div className="col-9">
-          <label className="font-13 text-secondary" htmlFor="nameCardInput">
-            Nombre del titular
-          </label>
-          <input type="text" className="form-control" id="nameCardInput" />
+          <FormGroup
+            name="cardName"
+            labelName="Nombre del titular"
+            value={props.cardName}
+            setValue={props.setCardName}
+            checkError={props.hasError}
+            errorMsg={props.errorForm.cardName}
+            inputId="add"
+          />
         </div>
         <div className="col-3 px-0 position-relative">
-          <label className="font-13 text-secondary" htmlFor="cvvInput">
-            CVV
-          </label>
-          <input type="text" className="form-control" id="cvvInput" />
-          <LockIcon
-            className="position-absolute lock-icon-cvv-position text-secondary"
-            width="16"
-            height="16"
+          <FormGroup
+            name="cardCvv"
+            labelName="CVV"
+            placeHolder="XXX"
+            value={props.cardCvv}
+            setValue={props.setCardCvv}
+            checkError={props.hasError}
+            errorMsg={props.errorForm.cardCvv}
+            inputId="add"
+            maxLength={3}
+            type="number"
           />
         </div>
       </div>
@@ -54,6 +66,7 @@ const FormCreditCard = (props) => {
           type="checkbox"
           className="form-check-input my-auto"
           id="saveCardInfo"
+          onClick={() => props.setSaveCardInfo()}
         />
         <label
           className="form-check-label text-secondary font-13"
