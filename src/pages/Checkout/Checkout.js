@@ -69,6 +69,8 @@ const Checkout = (props) => {
             previous={completeInvoice}
             complete={completePayment}
             setComplete={setCompletePayment}
+            cartItems={cartItems}
+            subTotal={subTotal}
           />
         </div>
         <div className="col-md-5 d-none d-md-block bg-white">
