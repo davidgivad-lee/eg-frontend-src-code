@@ -1,10 +1,14 @@
+# Welcome to givad's example source code! <br />
+Here you can find my piece of React code that simulate an ecommerce-page  <br />
 
-### `npm install`
+If you wanna run the project just:
 
-### `npm start`
+```sh
+$ cd project
+$ npm install
+$ npm start
+```
 
-Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+**God Bless You!**
